@@ -1,1 +1,5 @@
 *.img
+debugging.txt
+*.bz2
+impica_base
+impica_latest

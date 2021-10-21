@@ -19,7 +19,7 @@ RUN apt-get -y update && \
     libgoogle-perftools-dev\
     protobuf-compiler\
     libprotobuf-dev \
-    bzip2\
+    pbzip2\
     binutils-aarch64-linux-gnu \
     gcc-4.9-aarch64-linux-gnu
 
@@ -35,11 +35,15 @@ RUN cd IMPICA/gem5 && scons -j32 PIM_DEVICE=btree build/ARM/gem5.opt
 #Install KBLD
 ENV KBLD=/IMPICA/linux-aarch64-gem5-20140821/
 RUN ln -s /usr/bin/aarch64-linux-gnu-gcc-4.9 /usr/bin/aarch64-linux-gnu-gcc
-RUN cd $KBLD && make -j32 ARCH=arm64 O=$KBLD config
-RUN sed -i -e '$aCONFIG_PCI=y' $KBLD/.config
-RUN sed -i -e '$aCONFIG_MODULES=y' $KBLD/.config
-RUN cd $KBLD && yes "" | make -j32 ARCH=arm64 O=$KBLD config
-RUN cd $KBLD && CFLAGS=-warn-no-maybe-unintialized make -j32 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- V=1
+RUN cp /IMPICA/linux-aarch64-gem5-20140821/arch/arm64/configs/gem5_defconfig $KBLD/.config
+RUN cd $KBLD && make -j32 ARCH=arm64 O=$KBLD CROSS_COMPILE=aarch64-linux-gnu- oldconfig
+RUN cd $KBLD && make -j32 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- V=1
 
 #Install IMPICA
 RUN cd /IMPICA/pim_driver && make
+
+#Prepare necessary bootloaders
+RUN cd /IMPICA/gem5/system/arm/aarch64_bootloader/ && \
+  make
+RUN mkdir -p /IMPICA/gem5/build/binaries
+RUN ln -s /IMPICA/gem5/system/arm/aarch64_bootloader/boot_emm.arm64 /IMPICA/gem5/build/binaries/boot_emm.arm64
