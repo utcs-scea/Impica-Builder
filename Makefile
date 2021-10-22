@@ -11,12 +11,12 @@ image/aarch64-ubuntu-trusty-headless.img.bz2:
 	cd image; wget http://dist.gem5.org/dist/current/arm/disks/aarch64-ubuntu-trusty-headless.img.bz2
 
 image/aarch64-ubuntu-trusty-headless.img: image/aarch64-ubuntu-trusty-headless.img.bz2
-	pbzip2 -d -r -k -p32 $<
+	pbzip2 -d -r -k -f -p32 $<
 
-latest/aarch64-ubuntu-trusty-headless.img.bz2: image/aarch64-ubuntu-trusty-headless.img image/mnt impica_base
+latest/aarch64-ubuntu-trusty-headless.img.bz2: image/aarch64-ubuntu-trusty-headless.img image/mnt impica_base image/install.sh image/hack_back.conf
 	cd image; ./install.sh
 	pbzip2 -r -k -p32 -z -f -c $< > $@
 
-impica_latest: latest/aarch64-ubuntu-trusty-headless.img.bz2 latest/Dockerfile
+impica_latest: latest/aarch64-ubuntu-trusty-headless.img.bz2 latest/Dockerfile latest/scripts/
 	cd latest; docker build -t impica:latest .;
 	touch impica_latest
