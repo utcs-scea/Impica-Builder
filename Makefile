@@ -20,3 +20,6 @@ latest/aarch64-ubuntu-trusty-headless.img.bz2: image/aarch64-ubuntu-trusty-headl
 impica_latest: latest/aarch64-ubuntu-trusty-headless.img.bz2 latest/Dockerfile latest/scripts/
 	cd latest; docker build -t impica:latest .;
 	touch impica_latest
+
+clean:
+	rm -f image/aarch64-ubuntu-trusty-headless.img latest/aarch64-ubuntu-trusty-headless.img.bz2 impica_base impica_latest

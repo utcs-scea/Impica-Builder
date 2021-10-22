@@ -24,7 +24,7 @@ RUN apt-get -y update && \
     gcc-4.9-aarch64-linux-gnu
 
 #Get things
-RUN git clone https://github.com/CMU-SAFARI/IMPICA.git
+COPY IMPICA/ /IMPICA/
 
 #Prepare IMPICA-gem5
 RUN sed -i '1111s/^/\#/' IMPICA/gem5/src/SConscript

@@ -1,0 +1,4 @@
+[submodule "base/IMPICA"]
+	path = base/IMPICA
+	url = https://github.com/utcs-scea/IMPICA.git
+  branch = master
