@@ -10,7 +10,6 @@ mkdir -p ${WORK_PATH}/${U_ID}
 
 M5_PATH=/IMPICA/gem5/build/ ${GEM5_PATH}/build/ARM/gem5.opt \
   -d ${WORK_PATH}/${U_ID} \
-  --listener-mode=off \
   ${GEM5_PATH}/configs/example/fs.py \
   --machine-type=VExpress_EMM64 \
   -n 4 \
