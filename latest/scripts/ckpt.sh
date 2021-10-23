@@ -6,7 +6,7 @@ WORK_PATH=/work/m5_outputs
 
 U_ID=`date +"%d%b%Y%Z%H%M"`
 
-mkdir -p ${WORK_PATH}/m5_outputs/${U_ID}
+mkdir -p ${WORK_PATH}/${U_ID}
 
 M5_PATH=/IMPICA/gem5/build/ ${GEM5_PATH}/build/ARM/gem5.opt \
   -d ${WORK_PATH}/${U_ID} \
