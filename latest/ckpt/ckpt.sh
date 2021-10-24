@@ -17,7 +17,7 @@ M5_PATH=/IMPICA/gem5/build/ ${GEM5_PATH}/build/ARM/gem5.opt \
   --disk-image=/aarch64-ubuntu-trusty-headless.img \
   --dtb-file=$KBLD/arch/arm64/boot/dts/aarch64_gem5_server.dtb \
   --kernel=$KBLD/vmlinux \
-  --script /ckpt/ckpt.rsc \
+  --script /ckpt/hack_back_impica_ckpt.rcS \
   | tee ${WORK_PATH}/${U_ID}/${U_ID}.log
 
 mkdir -p ${WORK_PATH}/ckpt
