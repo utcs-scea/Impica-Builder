@@ -24,7 +24,7 @@ RUN apt-get -y update && \
     gcc-4.9-aarch64-linux-gnu
 
 #Get things
-COPY IMPICA/ /IMPICA/
+COPY IMPICA/gem5 /IMPICA/gem5/
 
 #Prepare IMPICA-gem5
 RUN sed -i '1111s/^/\#/' IMPICA/gem5/src/SConscript
@@ -32,12 +32,16 @@ RUN sed -i '1212s/^/    for target in ccflags.keys():\n        ccflags[target] +
 RUN cp IMPICA/gem5/build_opts/ARM IMPICA/gem5/build_opts/ARM.gem5.opt
 RUN cd IMPICA/gem5 && scons -j32 PIM_DEVICE=btree build/ARM/gem5.opt
 
+COPY IMPICA/linux-aarch64-gem5-20140821 /IMPICA/linux-aarch64-gem5-20140821
+
 #Install KBLD
 ENV KBLD=/IMPICA/linux-aarch64-gem5-20140821/
 RUN ln -s /usr/bin/aarch64-linux-gnu-gcc-4.9 /usr/bin/aarch64-linux-gnu-gcc
 RUN cp /IMPICA/linux-aarch64-gem5-20140821/arch/arm64/configs/gem5_defconfig $KBLD/.config
 RUN cd $KBLD && make -j32 ARCH=arm64 O=$KBLD CROSS_COMPILE=aarch64-linux-gnu- oldconfig
 RUN cd $KBLD && make -j32 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- V=1
+
+COPY IMPICA/pim_driver /IMPICA/pim_driver/
 
 #Install IMPICA
 RUN cd /IMPICA/pim_driver && make
@@ -47,3 +51,4 @@ RUN cd /IMPICA/gem5/system/arm/aarch64_bootloader/ && \
   make
 RUN mkdir -p /IMPICA/gem5/build/binaries
 RUN ln -s /IMPICA/gem5/system/arm/aarch64_bootloader/boot_emm.arm64 /IMPICA/gem5/build/binaries/boot_emm.arm64
+COPY IMPICA/workloads /IMPICA/workloads
