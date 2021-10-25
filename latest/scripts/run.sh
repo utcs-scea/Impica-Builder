@@ -37,7 +37,7 @@ cp ${NEW_SCRIPT} ${RESULTS_PATH}/${U_ID}
 M5_PATH=${GEM5_PATH}/build/ ${GEM5_PATH}/build/ARM/gem5.opt \
   -d ${RESULTS_PATH}/${U_ID} \
   ${GEM5_PATH}/configs/example/fs.py \
-  --restore-freom ${WORK_PATH}/ckpt/ \
+  --checkpoint-dir ${WORK_PATH}/ckpt/ \
   --machine-type=VExpress_EMM64 \
   -n 4 \
   --mem-size=2048MB \
