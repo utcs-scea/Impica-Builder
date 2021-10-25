@@ -27,4 +27,5 @@ impica_latest: latest/${IMG}.bz2 latest/Dockerfile latest/scripts/ latest/ckpt
 	touch impica_latest
 
 clean:
+	cd image; ./umount.sh
 	rm -f latest/${IMG}.bz2 impica_base impica_latest image/after.img
