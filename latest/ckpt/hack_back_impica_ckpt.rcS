@@ -32,7 +32,6 @@ else
 fi
 
 # Checkpoint the first execution
-cd /home/pim_driver; ./go_test.sh; cd /
 echo "Checkpointing simulation..."
 /sbin/m5 checkpoint
 
@@ -40,6 +39,7 @@ echo "Checkpointing simulation..."
 if [ "$RUNSCRIPT_VAR" -eq 1 ]
 then
 
+  cd /home/pim_driver; ./go_test.sh; cd /
 	# Signal our future self not to recurse infinitely
 	export RUNSCRIPT_VAR=2
 
