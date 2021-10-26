@@ -33,4 +33,8 @@ clean:
 singularity/impica.sif: singularity/Singularity impica_latest
 	cd singularity; sudo singularity build impica.sif Singularity
 
+out:
+	mkdir -p out
 
+test: singularity/impica.sif | out
+	cd out/; singularity run --writable-tmpfs `pwd`/../singularity/impica.sif "btree_pim5"  > blah.out 2> blah.err

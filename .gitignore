@@ -6,3 +6,4 @@ impica_latest
 *.out
 *.err
 *.sif
+out/
