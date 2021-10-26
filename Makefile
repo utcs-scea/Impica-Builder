@@ -29,3 +29,8 @@ impica_latest: latest/${IMG}.bz2 latest/Dockerfile latest/scripts/ latest/ckpt
 clean:
 	cd image; ./umount.sh
 	rm -f latest/${IMG}.bz2 impica_base impica_latest image/after.img
+
+singularity/impica.sif: singularity/Singularity impica_latest
+	cd singularity; sudo singularity build impica.sif Singularity
+
+

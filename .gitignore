@@ -5,3 +5,4 @@ impica_base
 impica_latest
 *.out
 *.err
+*.sif
