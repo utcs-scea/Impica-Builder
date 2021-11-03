@@ -28,7 +28,11 @@ mkdir -p ${RESULTS_PATH}/${U_ID}
 
 NEW_SCRIPT=${WORK_PATH}/${U_ID}/${SCRIPTLABEL}
 
-cp /scripts/${SCRIPTLABEL} ${NEW_SCRIPT}
+echo "git push -u origin main"
+
+echo "cd /home/pim_driver" > ${NEW_SCRIPT}
+echo "./go_test.sh" >> ${NEW_SCRIPT}
+cat /scripts/${SCRIPTLABEL} >> ${NEW_SCRIPT}
 echo $@ >> ${NEW_SCRIPT}
 echo "echo \$?" >> ${NEW_SCRIPT}
 echo "/sbin/m5 exit" >> ${NEW_SCRIPT}
