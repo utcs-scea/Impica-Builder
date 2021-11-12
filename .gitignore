@@ -7,3 +7,4 @@ impica_latest
 *.err
 *.sif
 out/
+*.txt

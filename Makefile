@@ -1,6 +1,8 @@
 IMG=aarch64-ubuntu-trusty-headless.img
 
-all: impica_latest
+RUNNER=? btree_pim5
+
+all: singularity/impica.sif
 
 impica_base: base/Dockerfile
 	cd base; sudo docker build -t impica:base .;
@@ -37,4 +39,4 @@ out:
 	mkdir -p out
 
 test: singularity/impica.sif | out
-	cd out/; singularity run --writable-tmpfs `pwd`/../singularity/impica.sif "btree_pim5"  > blah.out 2> blah.err
+	cd out/; singularity run --writable-tmpfs `pwd`/../singularity/impica.sif "${RUNNER}"  > blah.out 2> blah.err

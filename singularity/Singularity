@@ -3,7 +3,7 @@ Bootstrap: docker-daemon
 From: impica:latest
 
 %runscript
-exec /scripts/run.sh "$@"
+exec "$@"
 
 %post
 chmod -R 777 /work/ /out/
